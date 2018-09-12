@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :users, only: [] do
+      resources :users, only: :show do
         resources :followings, only: %i(index create destroy), shallow: true
       end
 
