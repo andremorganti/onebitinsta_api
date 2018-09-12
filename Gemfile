@@ -5,6 +5,7 @@ ruby '2.4.4'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise_token_auth'
+gem 'fast_jsonapi'
 gem 'puma', '~> 3.11'
 gem 'rack-attack'
 gem 'rack-cors'
