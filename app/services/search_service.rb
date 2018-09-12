@@ -16,11 +16,13 @@ class SearchService
 
 
   def search_users
-    User.where("email LIKE ?", "%#{@expression}%")
+    users = User.where("email LIKE ?", "%#{@expression}%")
+    UserSerializer.new(users).serializable_hash
   end
 
 
   def search_hashtags
-    Post.joins(hashtag_mappings: :hashtag).where("hashtags.name LIKE ?", "%#{@expression}%")
+    posts = Post.joins(hashtag_mappings: :hashtag).where("hashtags.name LIKE ?", "%#{@expression}%")
+    PostSerializer.new(posts, include: [:user, :hashtags]).serializable_hash
   end
 end
