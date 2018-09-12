@@ -5,9 +5,11 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :users, only: [] do
-        resources :followings, only: [:create, :destroy], shallow: true
+        resources :followings, only: %i(create destroy), shallow: true
       end
-      
+
+      resources :posts, only: %i(create show update destroy)
+
     end
   end
 end
