@@ -1,7 +1,7 @@
 class Api::V1::PostsController < Api::V1::ApiController
   def index
     @posts = User.find(params[:user_id]).posts
-    render json: { posts: @posts }
+    serialize(@posts)
   end
 
 
@@ -13,7 +13,7 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   def show
     @post = Post.find(params[:id])
-    render_post
+    serialize(@post)
   end
 
 
@@ -34,7 +34,7 @@ class Api::V1::PostsController < Api::V1::ApiController
 
 
   def save_post
-    render_post if @post.save
+    serialize(@post) if @post.save
   end
 
 
@@ -43,12 +43,12 @@ class Api::V1::PostsController < Api::V1::ApiController
   end
 
 
-  def render_post
-    render json: { post: { photo: rails_blob_url(@post.photo), description: @post.description } }
+  def post_params
+    params.require(:post).permit(:photo, :description)
   end
 
 
-  def post_params
-    params.require(:post).permit(:photo, :description)
+  def serialize(obj)
+    render json: PostSerializer.new(obj, include: [:user, :hashtags]).serializable_hash
   end
 end

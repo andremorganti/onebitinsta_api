@@ -1,7 +1,9 @@
 class Api::V1::FollowingsController < Api::V1::ApiController
   def index
     user = User.find(params[:user_id])
-    render json: { followers: user.followers, followings: user.followeds }
+    followers = UserSerializer.new(user.followers.map(&:follower)).serializable_hash
+    followings = UserSerializer.new(user.followeds.map(&:followed)).serializable_hash
+    render json: { followers: followers, followings: followings }
   end
 
 
