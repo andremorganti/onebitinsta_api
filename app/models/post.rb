@@ -9,14 +9,6 @@ class Post < ApplicationRecord
   validates :photo, file_presence: true
   validates :description, presence: true
 
-  after_save :map_hashtags!
-
-
-  private
-
-
-  def map_hashtags!
-    service = HashtagMappingService.new(self, :description)
-    service.call
-  end
+  include Hashtagable
+  hashtags_on :description
 end
