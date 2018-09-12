@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :likes, as: :likeable, dependent: :delete_all
-  has_many :hashtag_mappings, as: :hashtag_mapping
+  has_many :hashtag_mappings, as: :hashtagable
 
   has_one_attached :photo
 
