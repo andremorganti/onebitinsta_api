@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       end
 
       resources :home, only: :index
+      resources :search, only: :index
 
       resources :users, only: :show do
         resources :posts, only: :index
