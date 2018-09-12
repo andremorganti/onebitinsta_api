@@ -6,18 +6,25 @@ class HashtagMappingService
 
 
   def call
-    map_hashtags!
+    mapped_hashtags = map_hashtags_to_resource
+    remove_old_mappings(mapped_hashtags)
   end
 
 
   private
 
 
-  def map_hashtags!
-    hashtag_regex.each do |item|
+  def map_hashtags_to_resource
+    hashtag_regex.map do |item|
       hashtag = Hashtag.find_or_create_by(name: item[0])
       hashtag.mappings.find_or_create_by(hashtagable: @resource)
+      hashtag
     end
+  end
+
+
+  def remove_old_mappings(mapped_hashtags)
+    @resource.hashtag_mappings.where.not(hashtag_id: mapped_hashtags).delete_all
   end
 
 
