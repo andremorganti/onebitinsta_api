@@ -5,8 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  validates :name, presence: true
-
+  has_many :posts
   has_many :followeds, class_name: "Following", foreign_key: "follower_id"
   has_many :followers, class_name: "Following", foreign_key: "followed_id"
+
+  validates :name, presence: true
 end
