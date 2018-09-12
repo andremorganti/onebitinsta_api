@@ -11,6 +11,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :home, only: :index
+
       resources :users, only: :show do
         resources :posts, only: :index
         resources :followings, only: %i(index create destroy), shallow: true
