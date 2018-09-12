@@ -1,4 +1,10 @@
 class Api::V1::FollowingsController < Api::V1::ApiController
+  def index
+    user = User.find(params[:user_id])
+    render json: { followers: user.followers, followings: user.followeds }
+  end
+
+
   def create
     @following = current_user.followeds.build(followed_id: params[:user_id])
     save_following || render_error(@following.errors.full_messages)
