@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :posts
+  has_many :likes
   has_many :followeds, class_name: "Following", foreign_key: "follower_id"
   has_many :followers, class_name: "Following", foreign_key: "followed_id"
 
