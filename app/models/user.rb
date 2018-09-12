@@ -10,5 +10,7 @@ class User < ActiveRecord::Base
   has_many :followeds, class_name: "Following", foreign_key: "follower_id"
   has_many :followers, class_name: "Following", foreign_key: "followed_id"
 
+  has_one_attached :photo
+
   validates :name, presence: true
 end
