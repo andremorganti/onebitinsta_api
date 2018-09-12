@@ -1,4 +1,10 @@
 class Api::V1::PostsController < Api::V1::ApiController
+  def index
+    @posts = User.find(params[:user_id]).posts
+    render json: { posts: @posts }
+  end
+
+
   def create
     @post = current_user.posts.build(post_params)
     save_post || render_error(@post.errors.full_messages)
