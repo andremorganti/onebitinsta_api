@@ -4,12 +4,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.4.4'
 
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'devise_token_auth'
+gem 'devise'
 gem 'fast_jsonapi'
 gem 'puma', '~> 3.11'
 gem 'rack-attack'
 gem 'rack-cors'
 gem 'rails', '~> 5.2.1'
+gem 'simple_token_authentication'
 gem 'sqlite3'
 
 
