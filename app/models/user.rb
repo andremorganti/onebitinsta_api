@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
+  acts_as_token_authenticatable
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  include DeviseTokenAuth::Concerns::User
 
   has_many :posts
   has_many :likes
