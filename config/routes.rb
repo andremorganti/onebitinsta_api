@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users, defaults: { format: :json }
+
   namespace :api do
     namespace :v1 do
-      mount_devise_token_auth_for 'User', at: 'auth'
-
       concern :likeable do |options|
         shallow do
           post "/likes", { to: "likes#create", on: :member }.merge(options)
