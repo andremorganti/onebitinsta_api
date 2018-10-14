@@ -7,7 +7,9 @@ class PostSerializer
   attributes :description
 
   attribute :photo_url do |post|
-    Rails.application.routes.url_helpers.rails_blob_path(post.photo) if post.photo.attached?
+    if post.photo.attached?
+      Rails.application.routes.url_helpers.rails_blob_url(post.photo)
+    end
   end
 
   attribute :like_count do |post|

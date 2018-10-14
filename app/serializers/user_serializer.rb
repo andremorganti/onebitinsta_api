@@ -3,7 +3,9 @@ class UserSerializer
   
   attributes :name, :description, :email
 
-  attribute :photo_url do |post|
-    Rails.application.routes.url_helpers.rails_blob_path(post.photo) if post.photo.attached?
+  attribute :photo_url do |user|
+    if user.photo.attached?
+      Rails.application.routes.url_helpers.rails_blob_url(user.photo)
+    end 
   end
 end
