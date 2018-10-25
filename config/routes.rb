@@ -15,7 +15,9 @@ Rails.application.routes.draw do
 
       resources :users, only: :show do
         resources :posts, only: :index
-        resources :followings, only: %i(index create destroy), shallow: true
+        resources :followings, only: %i(index create) do
+	  delete "/", to: "followings#destroy", on: :collection
+	end
       end
 
       resources :posts, only: %i(create show update destroy) do
