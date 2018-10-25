@@ -11,6 +11,8 @@ class Api::V1::HomeController < Api::V1::ApiController
 
 
   def serialize_posts
-    render json: PostSerializer.new(@posts, { include: [:user, :hashtags] }).serializable_hash
+    render json: PostSerializer.new(@posts, params: { current_user: current_user },
+                                            include: [:user, :hashtags])
+                               .serializable_hash
   end
 end

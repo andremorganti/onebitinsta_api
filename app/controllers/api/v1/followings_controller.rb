@@ -1,8 +1,8 @@
 class Api::V1::FollowingsController < Api::V1::ApiController
   def index
     user = User.find(params[:user_id])
-    followers = UserSerializer.new(user.followers.map(&:follower)).serializable_hash
-    followings = UserSerializer.new(user.followeds.map(&:followed)).serializable_hash
+    followers = UserSerializer.new(user.followers.map(&:follower), params: { current_user: current_user }).serializable_hash
+    followings = UserSerializer.new(user.followeds.map(&:followed), params: { current_user: current_user }).serializable_hash
     render json: { followers: followers, followings: followings }
   end
 
@@ -14,7 +14,7 @@ class Api::V1::FollowingsController < Api::V1::ApiController
 
 
   def destroy
-    @following = current_user.followeds.find(params[:id])
+    @following = current_user.followeds.find_by(followed_id: params[:user_id])
     destroy_following || render_error("This following can't be destroyed")
   end
 
@@ -23,7 +23,7 @@ class Api::V1::FollowingsController < Api::V1::ApiController
 
 
   def save_following
-    render json: { following: @following } if @following.save
+    head :ok if @following.save
   end
 
 

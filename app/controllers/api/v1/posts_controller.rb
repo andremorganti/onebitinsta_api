@@ -44,11 +44,13 @@ class Api::V1::PostsController < Api::V1::ApiController
 
 
   def post_params
-    params.require(:post).permit(:photo, :description)
+    params.require(:post).permit(:photo_base64, :description)
   end
 
 
   def serialize(obj)
-    render json: PostSerializer.new(obj, include: [:user, :hashtags]).serializable_hash
+    render json: PostSerializer.new(obj, params: { current_user: current_user }, 
+                                         include: [:user, :hashtags])
+                               .serializable_hash
   end
 end

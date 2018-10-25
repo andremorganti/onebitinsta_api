@@ -15,4 +15,8 @@ class PostSerializer
   attribute :like_count do |post|
     post.likes.count
   end
+
+  attribute :is_liked do |post, params|
+    params && post.likes.where(user: params[:current_user]).exists?
+  end
 end
