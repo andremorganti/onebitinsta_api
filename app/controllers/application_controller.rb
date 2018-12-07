@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::API
+  include ActionController::Helpers
+  include ActionController::Flash
+  
   respond_to :json
   
   acts_as_token_authentication_handler_for User

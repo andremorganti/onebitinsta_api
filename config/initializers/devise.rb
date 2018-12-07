@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '85499444fa3f316f5b3b5a4047b26119945fd4d1ede4288c2893c09c0395ea922a1afbe247ba04a0f59a7adf77f77a6aed737eacc861c1e51aef6b6ef289058b'
+  config.secret_key = '85499444fa3f316f5b3b5a4047b26119945fd4d1ede4288c2893c09c0395ea922a1afbe247ba04a0f59a7adf77f77a6aed737eacc861c1e51aef6b6ef289058b'
   
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -249,6 +249,7 @@ Devise.setup do |config|
   #
   # The "*/*" below is required to match Internet Explorer requests.
   # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = [:json]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete

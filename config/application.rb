@@ -21,6 +21,7 @@ module OnebitinstaApi
   class Application < Rails::Application
     config.load_defaults 5.2
     config.api_only = true
+    config.middleware.use ActionDispatch::Flash
 
     config.generators do |g|
       g.test_framework nil
